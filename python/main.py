@@ -1,7 +1,7 @@
 
 def playNumber(x, rules):
     matches = [rules[y] for y in rules if x % y == 0]
-    
+
     return "".join(matches) or x
 
 

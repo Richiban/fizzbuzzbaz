@@ -1,24 +1,24 @@
-class NumberGame(val rules: Map<Int, String>) {
-    operator fun invoke(number: Int): String {
+class NumberGame(vararg val rules: Pair<Int, String>) {
+    fun playNumber(number: Int): String {
         val result = rules
-            .filterKeys { divisor -> number % divisor == 0 }
-            .toList()
-            .joinToString("") { it.second }
+            .mapNotNull { (divisor, word) -> if (number % divisor == 0) word else null }
+            .joinToString("") { it }
 
         return if (result.isEmpty()) number.toString() else result
     }
+    
+    operator fun invoke(range: IntRange): List<String> = 
+        range.map(::playNumber)
 }
 
 val fizzbuzz = NumberGame(
-    mapOf(
-        3 to "Fizz",
-        5 to "Buzz",
-        7 to "Baz",
-    )
+    3 to "Fizz",
+    5 to "Buzz",
+    7 to "Baz",
 )
 
 fun main() {
-    for (i in 1..100) {
-        println(fizzbuzz(i))
+    for (x in fizzbuzz(1..100)) {
+        println(x)
     }
 }

@@ -9,7 +9,7 @@ var fizzbuzz = new NumberGame()
     { 5, "Buzz" }
 };
 
-foreach (var x in fizzbuzz.Play(1,100))
+foreach (var x in fizzbuzz.Play(1, 100))
 {
     Console.WriteLine(x);
 }
